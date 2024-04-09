@@ -44,4 +44,7 @@ def main():
         print("Error: Build number is not provided!!!.")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except ValueError as e:
+        print("Something's Wrong!!! Please rectify this -: ", e)
