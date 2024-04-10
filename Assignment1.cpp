@@ -1,23 +1,40 @@
-#include <string>
-#include <cassert>
-#include <sstream>
+#include <bits/stdc++.h>
+using namespace std;
 
-std::string reverse_words(const std::string &str) {
-    std::istringstream inputStringStream(str);
+void swap(char& a, char& b) {
+    char temp = a;
+    a = b;
+    b = temp;
+}
 
-    std::ostringstream outputStringStream;
 
-    std::string inputWord;
+std::string reverse_words(const std::string& sentence) {
+    std::string revSentence;
+    std::string word;
+    
 
-    while (inputStringStream >> inputWord) {
-        std::string reversed_word(inputWord.rbegin(), inputWord.rend());
-        outputStringStream << reversed_word << " ";
+    for (char ch : sentence) {
+
+        if (std::isalnum(ch)) {
+            word += ch;
+        } else {
+            
+            for (int i = 0, j = word.length() - 1; i < j; ++i, --j) {
+                swap(word[i], word[j]);
+            }
+            revSentence += word;
+            word = "";
+            
+            revSentence += ch;
+        }
     }
-    std::string answer = outputStringStream.str();
-    if (!answer.empty()) {
-        answer.pop_back();
+
+    for (int i = 0, j = word.length() - 1; i < j; ++i, --j) {
+        swap(word[i], word[j]);
     }
-    return answer;
+    revSentence += word;
+    
+    return revSentence;
 }
 
 int main() {
